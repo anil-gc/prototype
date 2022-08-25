@@ -5,8 +5,13 @@ const app = express()
 dotenv.config()
 
 const expressLayouts = require("express-ejs-layouts")
+const bodyparser = require('body-parser')
+app.use(bodyparser.urlencoded({limit:'10mb',extended:false}))
+
 
 const indexRoutes = require("./routes/index")
+const authorRoutes = require("./routes/author")
+
 
 app.set('view engine','ejs')
 app.set('views', __dirname+'/views')
@@ -26,5 +31,6 @@ mongoose.connect(mongo_uri, () => {
 //database close
 
 app.use('/',indexRoutes)
+app.use('/authors',authorRoutes)
 
 app.listen(process.env.PORT || 3000)
