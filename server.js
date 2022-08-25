@@ -11,6 +11,7 @@ app.use(bodyparser.urlencoded({limit:'10mb',extended:false}))
 
 const indexRoutes = require("./routes/index")
 const authorRoutes = require("./routes/author")
+const bookRoutes = require("./routes/book")
 
 
 app.set('view engine','ejs')
@@ -32,5 +33,6 @@ mongoose.connect(mongo_uri, () => {
 
 app.use('/',indexRoutes)
 app.use('/authors',authorRoutes)
+app.use('/books',bookRoutes)
 
 app.listen(process.env.PORT || 3000)
